@@ -1,4 +1,4 @@
-# tmsgraduatework
+# [TMS] Graduate work
 > Dev by ZetXKS (Denis Markov)
 
 Online Course Application Project
