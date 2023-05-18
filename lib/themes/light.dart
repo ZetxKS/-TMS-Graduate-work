@@ -22,4 +22,5 @@ class LightThemeFonts {
   static const second12l = TextStyle(fontSize: 12, color: LightThemeColors.secondText, fontFamily: _fontFamily,);
   static const second12d = TextStyle(fontSize: 12, color: LightThemeColors.secondDarkText, fontFamily: _fontFamily,);
   static const second14 = TextStyle(fontSize: 14, color: LightThemeColors.secondText, fontFamily: _fontFamily,);
+  static const bottomNav = TextStyle(fontSize: 15, color: LightThemeColors.menuText, fontFamily: _fontFamily,);
 }
