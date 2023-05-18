@@ -9,6 +9,10 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: MyAppBar(),
       body: Placeholder(),
+      bottomNavigationBar: Container(
+        height: 58,
+        child: Placeholder(),
+      ),
     );
   }
 }

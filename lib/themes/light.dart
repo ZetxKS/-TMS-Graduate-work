@@ -13,12 +13,13 @@ class LightThemeColors {
 }
 
 class LightThemeFonts {
-  static const h1 = TextStyle(fontSize: 25, color: LightThemeColors.firstText, fontWeight: FontWeight.w500);
-  static const h2 = TextStyle(fontSize: 22, color: LightThemeColors.firstText, fontWeight: FontWeight.w500);
-  static const h3 = TextStyle(fontSize: 15, color: LightThemeColors.firstText, fontWeight: FontWeight.w500);
-  static const normal = TextStyle(fontSize: 18, color: LightThemeColors.firstText);
-  static const second11l = TextStyle(fontSize: 11, color: LightThemeColors.firstText);
-  static const second12l = TextStyle(fontSize: 12, color: LightThemeColors.firstText);
-  static const second12d = TextStyle(fontSize: 12, color: LightThemeColors.secondDarkText);
-  static const second14 = TextStyle(fontSize: 14, color: LightThemeColors.firstText);
+  static const _fontFamily = 'Roboto';
+  static const h1 = TextStyle(fontSize: 25, color: LightThemeColors.firstText, fontWeight: FontWeight.w700, fontFamily: _fontFamily);
+  static const h2 = TextStyle(fontSize: 22, color: LightThemeColors.firstText, fontWeight: FontWeight.w500, fontFamily: _fontFamily);
+  static const h3 = TextStyle(fontSize: 15, color: LightThemeColors.firstText, fontWeight: FontWeight.w500, fontFamily: _fontFamily);
+  static const normal = TextStyle(fontSize: 18, color: LightThemeColors.firstText, fontFamily: _fontFamily,);
+  static const second11l = TextStyle(fontSize: 11, color: LightThemeColors.secondText, fontFamily: _fontFamily,);
+  static const second12l = TextStyle(fontSize: 12, color: LightThemeColors.secondText, fontFamily: _fontFamily,);
+  static const second12d = TextStyle(fontSize: 12, color: LightThemeColors.secondDarkText, fontFamily: _fontFamily,);
+  static const second14 = TextStyle(fontSize: 14, color: LightThemeColors.secondText, fontFamily: _fontFamily,);
 }

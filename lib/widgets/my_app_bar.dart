@@ -16,28 +16,32 @@ class _MyAppBarState extends State<MyAppBar>{
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        children: [
-          Column(
-            children: [
-              Text('Hola, sayef!', style: LightThemeFonts.h1,),
-              Text('What do you wanna learn today?', style: LightThemeFonts.second14,),
-            ],
-          ),
-          Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle
-            ),
-            child: Image.asset('assets/images/avatar.jpg'),
-          )
-        ],
-      ),
-    );
-    /*AppBar(
+    return AppBar(
       backgroundColor: LightThemeColors.appBarBackground,
-      title: const Text("Hola, sayef!", style: LightThemeFonts.h1),
-
-    );*/
+      title: RichText(
+        text: TextSpan(
+          text: "Hola, sayef!",
+          style: LightThemeFonts.h1,
+          children: <TextSpan>[
+            TextSpan(
+              text: '\nWhat do you wanna learn today?',
+              style: LightThemeFonts.second11l.copyWith(
+                fontWeight: FontWeight.normal,
+                height: 2
+              )
+            )
+          ],
+        ),
+      ),
+      actions: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: CircleAvatar(
+            backgroundImage: AssetImage('assets/images/avatar.jpg'),
+          ),
+        ),
+      ],
+      elevation: 0,
+    );
   }
 }
