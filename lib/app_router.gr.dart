@@ -15,16 +15,22 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
-    AppRoute.name: (routeData) {
+    BookmakrRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const AppScreen(),
+        child: const BookmakrScreen(),
       );
     },
     IndexRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const IndexScreen(),
+      );
+    },
+    ProfileRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ProfileScreen(),
       );
     },
     SearchRoute.name: (routeData) {
@@ -37,15 +43,15 @@ abstract class _$AppRouter extends RootStackRouter {
 }
 
 /// generated route for
-/// [AppScreen]
-class AppRoute extends PageRouteInfo<void> {
-  const AppRoute({List<PageRouteInfo>? children})
+/// [BookmakrScreen]
+class BookmakrRoute extends PageRouteInfo<void> {
+  const BookmakrRoute({List<PageRouteInfo>? children})
       : super(
-          AppRoute.name,
+          BookmakrRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'AppRoute';
+  static const String name = 'BookmakrRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -60,6 +66,20 @@ class IndexRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'IndexRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ProfileScreen]
+class ProfileRoute extends PageRouteInfo<void> {
+  const ProfileRoute({List<PageRouteInfo>? children})
+      : super(
+          ProfileRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ProfileRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

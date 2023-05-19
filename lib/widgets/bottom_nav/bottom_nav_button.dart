@@ -4,11 +4,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tmsgraduatework/app_router.dart';
 import 'package:tmsgraduatework/themes/light.dart';
 
-class BottomNavButton extends StatefulWidget {
+class BottomNavButton extends StatelessWidget {
   final String svg;
   final String name;
   final String navigateTo;
-
   const BottomNavButton(
       {Key? key,
       required this.svg,
@@ -17,26 +16,24 @@ class BottomNavButton extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<BottomNavButton> createState() => _BottomNavButtonState();
-}
-
-class _BottomNavButtonState extends State<BottomNavButton> {
-  void navigate() {
-    if(AutoRouter.of(context).currentPath != widget.navigateTo) {
-      AutoRouter.of(context).pushNamed(widget.navigateTo);
-    }
-    setState(() {});
-
-  }
-  @override
   Widget build(BuildContext context) {
+    final active = (AutoRouter.of(context).currentPath == navigateTo);
     return InkWell(
-      onTap: navigate,
+      onTap: () {
+        final _router = AutoRouter.of(context);
+        if (active && navigateTo != '/') {
+          return;
+        } else if (navigateTo == '/') {
+          _router.pushAndPopUntil(IndexRoute(), predicate: (_) => false);
+          return;
+        }
+        _router.pushNamed(navigateTo);
+      },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Row(
           children: [
-            if (AutoRouter.of(context).currentPath == widget.navigateTo)
+            if (active)
               Container(
                 padding: const EdgeInsets.all(10),
                 //HELP: Пытался расскрасить с помощью кода, просто подставляется другая картинка((( SvgPicture.asset('assets/icons/$svg.svg', colorFilter: ColorFilter.mode(Colors.white, BlendMode.softLight),),
@@ -44,17 +41,17 @@ class _BottomNavButtonState extends State<BottomNavButton> {
                   color: LightThemeColors.menuActive,
                   shape: BoxShape.circle,
                 ),
-                child: SvgPicture.asset('assets/icons/${widget.svg}_active.svg'),
+                child: SvgPicture.asset('assets/icons/${svg}_active.svg'),
               )
             else
-              SvgPicture.asset('assets/icons/${widget.svg}.svg'),
-            if (AutoRouter.of(context).currentPath == widget.navigateTo)
+              SvgPicture.asset('assets/icons/$svg.svg'),
+            if (active)
               const SizedBox(
                 width: 15,
               ),
-            if (AutoRouter.of(context).currentPath == widget.navigateTo)
+            if (active)
               Text(
-                widget.name,
+                name,
                 style: LightThemeFonts.bottomNav,
               ),
           ],

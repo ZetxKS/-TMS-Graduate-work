@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tmsgraduatework/app_router.dart';
-import 'package:tmsgraduatework/screens/app_screen.dart';
 
 class App extends StatelessWidget {
   final _appRouter = AppRouter();
@@ -10,6 +9,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerConfig: _appRouter.config(),
+      theme: ThemeData(fontFamily: 'Roboto'),
     );
   }
 }
