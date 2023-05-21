@@ -5,7 +5,7 @@ class Api {
   static final _dio = Dio(
     BaseOptions(
         baseUrl:
-            "https://raw.githubusercontent.com/alex-shinkevich/tms_api/main/project-5/"),
+            "https://raw.githubusercontent.com/zetxks/tms_api/main/project-5/"),
   );
 
   static Future<Map<String,dynamic>> get(String method) async {

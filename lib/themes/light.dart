@@ -5,7 +5,7 @@ class LightThemeColors {
   static const secondText = Color(0xFF70747E);
   static const secondDarkText = Color(0xFF585D69);
   static const inputTextPlaceholder = Color(0xFF888C94);
-  static const badgeBackground = Color(0xFF282F3E);
+  static const badgeBackground = Color(0xFFFD853A);
   static const badgeText = Color(0xFFFFFFFF);
   static const menuActive = Color(0xFF265AE8);
   static const menuText = Color(0xFF404653);

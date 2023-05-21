@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tmsgraduatework/models/course_model.dart';
+import 'package:tmsgraduatework/src/utils.dart';
 import 'package:tmsgraduatework/state/api_state.dart';
 import 'package:tmsgraduatework/state/course/course_cubit.dart';
 import 'package:tmsgraduatework/widgets/index_screen/block_header.dart';
@@ -14,6 +15,7 @@ class PopularCourses extends StatelessWidget {
     return Column(
       children: [
         BlockHeader(title: "Most watching category in month"),
+        SizedBox(height: 30,),
         BlocBuilder<CourseCubit, ApiState>(
             builder: (BuildContext context, ApiState state) {
           switch (state.runtimeType) {
@@ -57,31 +59,25 @@ class _loading extends StatelessWidget {
 
 class _loaded extends StatelessWidget {
   final List<CourseModel> courses;
-  int type;
-  int limit;
-  List<CourseModel> preparedCourses = [];
 
-  _loaded({super.key, required this.courses, this.type = 0, this.limit = 2});
-
-  void prepareCourses() {
-    preparedCourses = [];
-    if (type == 0) {
-      preparedCourses = courses.take(limit == 0 ? courses.length : limit).toList();
-    } else {
-      for (CourseModel course in courses) {
-        if (course.type == type && ((limit == 0 && preparedCourses.length <= limit) || limit == 0)) {
-          preparedCourses.add(course);
-        }
-      }
-    }
-  }
+  _loaded({super.key, required this.courses});
 
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
-      crossAxisCount: 2,
-      crossAxisSpacing: 15,
-      children: preparedCourses.map((e) => CourseCardIndex(model: e)).toList(),
+    List<CourseModel> courses = [];
+    for (CourseModel course in this.courses) {
+      if (course.type == 3) {
+        courses.add(course);
+      }
+    }
+    return Row(
+      children: [
+        CourseCardIndex(model: courses[0]),
+        SizedBox(
+          width: 10,
+        ),
+        CourseCardIndex(model: courses[1])
+      ],
     );
   }
 }
