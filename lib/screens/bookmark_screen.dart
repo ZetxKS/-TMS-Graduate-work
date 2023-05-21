@@ -9,10 +9,6 @@ class BookmakrScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: MyAppBar(),
-      body: Placeholder(),
-      bottomNavigationBar: BottomNav(),
-    );
+    return Placeholder();
   }
 }

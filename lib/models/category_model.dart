@@ -1,9 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:tmsgraduatework/src/model.dart';
 
 part 'category_model.g.dart';
 
 @JsonSerializable()
-class CategoryModel {
+class CategoryModel extends Model {
   final String image;
   final String name;
 

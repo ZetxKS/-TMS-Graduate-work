@@ -1,10 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:tmsgraduatework/providers/category_provider.dart';
-import 'package:tmsgraduatework/widgets/category_card.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tmsgraduatework/state/category/category_cubit.dart';
+import 'package:tmsgraduatework/state/course/course_cubit.dart';
+import 'package:tmsgraduatework/widgets/index_screen/popular_category.dart';
+import 'package:tmsgraduatework/widgets/index_screen/popular_courses.dart';
 import 'package:tmsgraduatework/widgets/index_screen/search_text_field.dart';
-import 'package:tmsgraduatework/widgets/my_app_bar.dart';
-import 'package:tmsgraduatework/widgets/bottom_nav/bottom_nav.dart';
 
 @RoutePage()
 class IndexScreen extends StatelessWidget {
@@ -12,26 +13,17 @@ class IndexScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final CategoryProvider cp = CategoryProvider();
-    cp.getCategoryes();
-    return Scaffold(
-      appBar: MyAppBar(),
-      body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-        children: [
-          SearchTextField(),
-          Row(
-            children: [
-              CategoryCard(),
-              SizedBox(
-                width: 14,
-              ),
-              CategoryCard()
-            ],
-          )
-        ],
-      ),
-      bottomNavigationBar: const BottomNav(),
+    context.watch<CourseCubit>().load();
+    context.watch<CategoryCubit>().load();
+    return ListView(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      children: [
+        SearchTextField(),
+        const SizedBox(height: 40,),
+        PopularCategory(),
+        const SizedBox(height: 40,),
+        PopularCourses()
+      ],
     );
   }
 }
