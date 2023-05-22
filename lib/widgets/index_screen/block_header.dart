@@ -13,6 +13,7 @@ class BlockHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Flexible(
             child: Text(
@@ -22,7 +23,9 @@ class BlockHeader extends StatelessWidget {
         SizedBox(
           width: 30,
         ),
-        SeeMore(navTo: navTo,)
+        SeeMore(
+          navTo: navTo,
+        )
       ],
     );
   }

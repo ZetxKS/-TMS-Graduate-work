@@ -9,24 +9,143 @@ class CourseCardIndex extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: Image.network(
-              model.image,
-              fit: BoxFit.cover,
-            ).image,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            height: 146,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              image: DecorationImage(
+                image: Image.network(model.image).image,
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 7, horizontal: 20),
+                  decoration: BoxDecoration(
+                      color: LightThemeColors.badgeBackground,
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Text(
+                    model.label.toUpperCase(),
+                    style:
+                        LightThemeFonts.second14.copyWith(color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
           ),
+          const SizedBox(
+            height: 12,
+          ),
+          Text(
+            model.title,
+            style: LightThemeFonts.h3,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Text(
+            model.teacher,
+            style: LightThemeFonts.second12d,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                model.rating.toString(),
+                style: LightThemeFonts.second11l,
+              ),
+              const SizedBox(
+                width: 9,
+              ),
+              _rating(rating: model.rating),
+              Expanded(
+                child: Text(
+                  "(${model.voters})",
+                  style: LightThemeFonts.second12d,
+                  textAlign: TextAlign.right,
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class _rating extends StatelessWidget {
+  final double rating;
+  const _rating({super.key, required this.rating});
+
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> stars = [];
+    for (var i = 0; i < rating.floor(); i++) {
+      stars.add(Icon(
+        Icons.star,
+        color: LightThemeColors.starColor,
+      ));
+    }
+    if ((rating - rating.floor()) != 0) {
+      stars.add(
+        GradientIcon(
+          Icons.star,
+          24,
+          LinearGradient(
+              colors: [
+                LightThemeColors.starColor,
+                LightThemeColors.starColor,
+                LightThemeColors.starColor.withOpacity(0)
+              ],
+              begin: const FractionalOffset(0, 1),
+              stops: [(rating - rating.floor()), 1, 1],
+              end: FractionalOffset((rating - rating.floor()), 1)),
         ),
-        height: 146,
-        child: Text(
-          model.label.toUpperCase(),
-          style: LightThemeFonts.normal.copyWith(
-            color: Colors.white,
-            backgroundColor: LightThemeColors.badgeBackground,
-          ),
+      );
+    }
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: stars,
+    );
+  }
+}
+
+class GradientIcon extends StatelessWidget {
+  GradientIcon(
+    this.icon,
+    this.size,
+    this.gradient,
+  );
+
+  final IconData icon;
+  final double size;
+  final Gradient gradient;
+
+  @override
+  Widget build(BuildContext context) {
+    return ShaderMask(
+      child: SizedBox(
+        width: size * 1.2,
+        height: size * 1.2,
+        child: Icon(
+          icon,
+          size: size,
+          color: Colors.white,
         ),
       ),
+      shaderCallback: (Rect bounds) {
+        final Rect rect = Rect.fromLTRB(0, 0, size, size);
+        return gradient.createShader(rect);
+      },
     );
   }
 }

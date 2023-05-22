@@ -10,6 +10,7 @@ class LightThemeColors {
   static const menuActive = Color(0xFF265AE8);
   static const menuText = Color(0xFF404653);
   static const appBarBackground = Color(0xFFFFFFFF);
+  static const starColor = Color(0xFFFFA927);
 }
 
 class LightThemeFonts {
@@ -24,7 +25,7 @@ class LightThemeFonts {
   static const h3 = TextStyle(
       fontSize: 15,
       color: LightThemeColors.firstText,
-      fontWeight: FontWeight.w500);
+      fontWeight: FontWeight.bold);
   static const normal = TextStyle(
     fontSize: 18,
     color: LightThemeColors.firstText,

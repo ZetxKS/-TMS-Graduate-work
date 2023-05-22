@@ -5,6 +5,7 @@ import 'package:tmsgraduatework/state/category/category_cubit.dart';
 import 'package:tmsgraduatework/state/course/course_cubit.dart';
 import 'package:tmsgraduatework/widgets/index_screen/popular_category.dart';
 import 'package:tmsgraduatework/widgets/index_screen/popular_courses.dart';
+import 'package:tmsgraduatework/widgets/index_screen/popular_teachers.dart';
 import 'package:tmsgraduatework/widgets/index_screen/search_text_field.dart';
 
 @RoutePage()
@@ -19,10 +20,18 @@ class IndexScreen extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       children: [
         SearchTextField(),
-        const SizedBox(height: 40,),
+        const SizedBox(
+          height: 40,
+        ),
         PopularCategory(),
-        const SizedBox(height: 40,),
-        PopularCourses()
+        const SizedBox(
+          height: 40,
+        ),
+        PopularCourses(),
+        const SizedBox(
+          height: 40,
+        ),
+        PopularTeachers(),
       ],
     );
   }
