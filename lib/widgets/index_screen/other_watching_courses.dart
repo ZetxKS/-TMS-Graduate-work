@@ -10,35 +10,36 @@ import 'package:tmsgraduatework/widgets/index_screen/courses_states_widgets/erro
 import 'package:tmsgraduatework/widgets/index_screen/courses_states_widgets/loaded_courses_cards.dart';
 import 'package:tmsgraduatework/widgets/index_screen/courses_states_widgets/loading_courses_cards.dart';
 
-class PopularCourses extends StatelessWidget {
-  const PopularCourses({super.key});
+class OtherWatchingCourses extends StatelessWidget {
+  const OtherWatchingCourses({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const BlockHeader(title: "Most watching category in month"),
+        const BlockHeader(title: "Continue to watch previous class"),
         SizedBoxes.h30,
         BlocBuilder<CourseCubit, ApiState>(
-            builder: (BuildContext context, ApiState state) {
-          switch (state.runtimeType) {
-            case ApiEmptySate:
-              return const EmptyCoursesCards();
-            case ApiLoadingState:
-              return const LoadingCoursesCards();
-            case ApiLoadedState:
-              return LoadedCoursesCards(
-                courses: (state as ApiLoadedState).list as List<CourseModel>,
-                type: 3,
-              );
-            case ApiErrorState:
-              return ErrorCoursesCards(
-                error: (state as ApiErrorState).error,
-              );
-            default:
-              return const SizedBox();
-          }
-        })
+          builder: (BuildContext context, ApiState state) {
+            switch (state.runtimeType) {
+              case ApiEmptySate:
+                return const EmptyCoursesCards();
+              case ApiLoadingState:
+                return const LoadingCoursesCards();
+              case ApiLoadedState:
+                return LoadedCoursesCards(
+                  courses: (state as ApiLoadedState).list as List<CourseModel>,
+                  type: 2,
+                );
+              case ApiErrorState:
+                return ErrorCoursesCards(
+                  error: (state as ApiErrorState).error,
+                );
+              default:
+                return const SizedBox();
+            }
+          },
+        )
       ],
     );
   }

@@ -20,9 +20,7 @@ class BlockHeader extends StatelessWidget {
           title,
           style: LightThemeFonts.h1,
         )),
-        SizedBox(
-          width: 30,
-        ),
+        SizedBoxes.w30,
         SeeMore(
           navTo: navTo,
         )

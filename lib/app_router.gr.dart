@@ -15,6 +15,12 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    AppRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AppScreen(),
+      );
+    },
     BookmakrRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -39,13 +45,21 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const SearchScreen(),
       );
     },
-    AppRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const AppScreen(),
-      );
-    },
   };
+}
+
+/// generated route for
+/// [AppScreen]
+class AppRoute extends PageRouteInfo<void> {
+  const AppRoute({List<PageRouteInfo>? children})
+      : super(
+          AppRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AppRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -100,20 +114,6 @@ class SearchRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'SearchRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [AppScreen]
-class AppRoute extends PageRouteInfo<void> {
-  const AppRoute({List<PageRouteInfo>? children})
-      : super(
-          AppRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'AppRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

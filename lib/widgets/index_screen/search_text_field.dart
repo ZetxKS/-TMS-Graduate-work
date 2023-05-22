@@ -33,7 +33,7 @@ class SearchTextField extends StatelessWidget {
         focusedBorder: border,
         disabledBorder: border,
         filled: true,
-        fillColor: Color(0xFFFFF1F3),
+        fillColor: const Color(0xFFFFF1F3),
       ),
     );
   }

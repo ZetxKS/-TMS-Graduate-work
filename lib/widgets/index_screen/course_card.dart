@@ -41,16 +41,12 @@ class CourseCardIndex extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(
-            height: 12,
-          ),
+          SizedBoxes.h10,
           Text(
             model.title,
             style: LightThemeFonts.h3,
           ),
-          const SizedBox(
-            height: 10,
-          ),
+          SizedBoxes.h10,
           Text(
             model.teacher,
             style: LightThemeFonts.second12d,
@@ -62,9 +58,7 @@ class CourseCardIndex extends StatelessWidget {
                 model.rating.toString(),
                 style: LightThemeFonts.second11l,
               ),
-              const SizedBox(
-                width: 9,
-              ),
+              SizedBoxes.w10,
               _rating(rating: model.rating),
               Expanded(
                 child: Text(
@@ -89,16 +83,17 @@ class _rating extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> stars = [];
     for (var i = 0; i < rating.floor(); i++) {
-      stars.add(Icon(
+      stars.add(const Icon(
         Icons.star,
         color: LightThemeColors.starColor,
+        size: 20,
       ));
     }
     if ((rating - rating.floor()) != 0) {
       stars.add(
         GradientIcon(
           Icons.star,
-          24,
+          20,
           LinearGradient(
               colors: [
                 LightThemeColors.starColor,

@@ -9,15 +9,16 @@ class SeeMore extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-        onPressed: () {
-          if (navTo != null) {
-            BlocProvider.of<BottomNavCubit>(context).navigate(context, navTo!);
-          }
-        },
-        child: const Text(
-          "see more",
-          style: LightThemeFonts.second14,
-        ));
+    return GestureDetector(
+      onTap: () {
+        if (navTo != null) {
+          BlocProvider.of<BottomNavCubit>(context).navigate(context, navTo!);
+        }
+      },
+      child: Text(
+        "see more",
+        style: LightThemeFonts.second14.copyWith(fontWeight: FontWeight.bold),
+      ),
+    );
   }
 }
