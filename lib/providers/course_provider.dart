@@ -1,33 +1,66 @@
+import 'dart:convert';
+
 import 'package:sqflite/sqflite.dart';
 import 'package:tmsgraduatework/models/course_model.dart';
 import 'package:tmsgraduatework/src/api.dart';
 
 class CourseProvider {
-  static Future<Database> _getInstanse() async {
-    Database db = await openDatabase('saved.db');
-    await db.execute("create table if not exists saved_courses (id integer not null constraint saved_courses_pk primary key autoincrement, json text not null, name integer not null constraint saved_courses_pk unique);");
-    return db;
-  }
+  Database? db;
 
-  static void saveCourse(CourseModel model) async {
-    Database db = await CourseProvider._getInstanse();
-    Map<String, dynamic> json = model.toJson(save: true);
-    try {
-      int id = await db.insert('saved_courses', {"json": json.toString(), "name": model.title});
-      print("ADDED:::$id");
-    } catch (e) {
-      print(e);
+  Future<void> _getInstanse() async {
+    if (db != null) {
+      try {
+        db = await openDatabase('saved.db', version: 3, onCreate: (dbl, integ) async {
+          await dbl.execute('create table saved_courses'
+            '('
+              'id      integer'
+              'constraint saved_courses_pk'
+              'primary key,'
+              'image   text    not null,'
+              'rating  REAL    not null,'
+              'teacher TEXT    not null,'
+              'label   text    not null,'
+              'voters  integer not null,'
+              'title   text'
+              'constraint saved_courses_pk'
+              'unique'
+          ');');
+        });
+      } catch (e) {
+        print(e.toString());
+      }
     }
   }
 
-  static void delCourse(CourseModel model) async {
-    Database db = await CourseProvider._getInstanse();
+  Future<void> saveCourse(CourseModel model) async {
+    await _getInstanse();
     try {
-      int rows = await db.delete("saved_courses", where: "name = ?", whereArgs: [model.title]);
-      print("DELETED::$rows");
+      int id = await db!.insert('saved_courses', model.toJson());
     } catch (e) {
-      print(e);
+      print(e.toString());
     }
+  }
+
+  Future<void> delCourse(CourseModel model) async {
+    await _getInstanse();
+    try {
+      int rows = await db!.delete("saved_courses", where: "title = ?", whereArgs: [model.title]);
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  Future<List<CourseModel>> getLocalCourses() async {
+    await _getInstanse();
+    List<CourseModel> models = [];
+    try {
+      List<Map<String, dynamic>> result = await db!.rawQuery("SELECT * FROM saved_courses");
+      print(result);
+      models = result.map((e) => CourseModel.fromJson(e)).toList();
+    } catch (e) {
+      print(e.toString());
+    }
+    return models;
   }
 
   Future<List<CourseModel>> getCourses() async {
@@ -47,7 +80,9 @@ class CourseProvider {
       CourseModel tmp = CourseModel.fromJson(e);
       return tmp..type = 3;
     }).toList();
-    List<CourseModel> list = (previous as List<CourseModel>) + (others as List<CourseModel>) + (mostPopular as List<CourseModel>);
+    List<CourseModel> list = (previous as List<CourseModel>) +
+        (others as List<CourseModel>) +
+        (mostPopular as List<CourseModel>);
     return list;
   }
 }

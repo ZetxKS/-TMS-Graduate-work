@@ -30,7 +30,7 @@ class LoadedCategoryCards extends StatelessWidget {
               crossAxisCount: 2,
               crossAxisSpacing: 15,
               mainAxisSpacing: 15,
-              children: categories.map((e) => CategoryCard(model: e)).toList(),
+              children: categories.map((e) => CategoryCard(model: e, mode: type,)).toList(),
             ),
           ),
         ],

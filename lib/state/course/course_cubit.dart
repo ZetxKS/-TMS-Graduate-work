@@ -8,6 +8,26 @@ class CourseCubit extends Cubit<ApiState> {
 
   CourseCubit() : super(ApiEmptySate());
 
+  void loadLocal() async {
+    emit(ApiLoadingState());
+    List<CourseModel> list = await _courseProvider.getLocalCourses();
+    if(list.isNotEmpty) {
+      emit(ApiLoadedState(list: list));
+    } else {
+      emit(ApiEmptySate());
+    }
+  }
+
+  Future<void> save(CourseModel model) async {
+    await _courseProvider.saveCourse(model);
+    loadLocal();
+  }
+
+  Future<void> delete(CourseModel model) async {
+    await _courseProvider.delCourse(model);
+    loadLocal();
+  }
+
   void load() async {
     try {
       final List<CourseModel> courses =

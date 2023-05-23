@@ -18,10 +18,7 @@ class CourseModel extends Model{
 
   factory CourseModel.fromJson(Map<String, dynamic> json) => _$CourseModelFromJson(json);
 
-  Map<String, dynamic> toJson({bool save = false}) {
-    if(save) {
-      type = 99;
-    }
+  Map<String, dynamic> toJson() {
     return _$CourseModelToJson(this);
   }
 }
