@@ -8,24 +8,24 @@ class CourseProvider {
   Database? db;
 
   Future<void> _getInstanse() async {
-    if (db != null) {
+    if (db == null) {
       try {
-        db = await openDatabase('saved.db', version: 3, onCreate: (dbl, integ) async {
-          await dbl.execute('create table saved_courses'
-            '('
-              'id      integer'
-              'constraint saved_courses_pk'
-              'primary key,'
-              'image   text    not null,'
-              'rating  REAL    not null,'
-              'teacher TEXT    not null,'
-              'label   text    not null,'
-              'voters  integer not null,'
-              'title   text'
-              'constraint saved_courses_pk'
-              'unique'
-          ');');
-        });
+        db = await openDatabase(
+          'saved.db',
+          version: 3,
+          onCreate: (dbl, integ) async {
+            await dbl.execute('CREATE TABLE "saved_courses" ('
+                '"image" TEXT NOT NULL,'
+                '"rating" REAL NOT NULL,'
+                '"teacher" TEXT NOT NULL,'
+                '"label" TEXT NOT NULL,'
+                '"voters" INTEGER NOT NULL,'
+                '"title" TEXT NOT NULL,'
+                'UNIQUE("title") ON CONFLICT REPLACE'
+                ')'
+                ';');
+          },
+        );
       } catch (e) {
         print(e.toString());
       }
@@ -44,7 +44,8 @@ class CourseProvider {
   Future<void> delCourse(CourseModel model) async {
     await _getInstanse();
     try {
-      int rows = await db!.delete("saved_courses", where: "title = ?", whereArgs: [model.title]);
+      await db!.delete("saved_courses",
+          where: "title = ?", whereArgs: [model.title]);
     } catch (e) {
       print(e.toString());
     }
@@ -54,8 +55,8 @@ class CourseProvider {
     await _getInstanse();
     List<CourseModel> models = [];
     try {
-      List<Map<String, dynamic>> result = await db!.rawQuery("SELECT * FROM saved_courses");
-      print(result);
+      List<Map<String, dynamic>> result =
+          await db!.rawQuery("SELECT * FROM saved_courses");
       models = result.map((e) => CourseModel.fromJson(e)).toList();
     } catch (e) {
       print(e.toString());

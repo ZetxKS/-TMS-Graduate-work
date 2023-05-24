@@ -11,6 +11,7 @@ class BottomNavCubit extends Cubit<int> {
     if (active && index != 0) {
       return;
     }
+    _tabsRouter.popTop();
     emit(index);
     _tabsRouter.setActiveIndex(index);
   }

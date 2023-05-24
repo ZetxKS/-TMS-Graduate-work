@@ -12,6 +12,7 @@ class LightThemeColors {
   static const appBarBackground = Color(0xFFFFFFFF);
   static const starColor = Color(0xFFFFA927);
   static const trialBackground = Color(0xFFFFF1F3);
+  static const profileAppBarBackground = Color(0xFFB32318);
 }
 
 class LightThemeFonts {

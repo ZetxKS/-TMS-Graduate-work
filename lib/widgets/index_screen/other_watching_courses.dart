@@ -28,7 +28,7 @@ class OtherWatchingCourses extends StatelessWidget {
                 return const LoadingCoursesCards();
               case ApiLoadedState:
                 return LoadedCoursesCards(
-                  courses: (state as ApiLoadedState).list as List<CourseModel>,
+                  courses: (state as ApiLoadedState).list[0] as List<CourseModel>,
                   type: 2,
                 );
               case ApiErrorState:

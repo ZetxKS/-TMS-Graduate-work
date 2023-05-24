@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tmsgraduatework/models/course_model.dart';
+import 'package:tmsgraduatework/state/course/course_cubit.dart';
 import 'package:tmsgraduatework/themes/light.dart';
 
 class CourseCardIndex extends StatelessWidget {
@@ -9,67 +11,73 @@ class CourseCardIndex extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: 146,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              image: DecorationImage(
-                image: Image.network(model.image).image,
-                fit: BoxFit.cover,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onDoubleTap: () {
+          BlocProvider.of<CourseCubit>(context, listen: false).save(model);
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 146,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                image: DecorationImage(
+                  image: Image.network(model.image).image,
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: Align(
-                alignment: Alignment.topLeft,
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 7, horizontal: 20),
-                  decoration: BoxDecoration(
-                      color: LightThemeColors.badgeBackground,
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Text(
-                    model.label.toUpperCase(),
-                    style:
-                        LightThemeFonts.second14.copyWith(color: Colors.white),
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 7, horizontal: 20),
+                    decoration: BoxDecoration(
+                        color: LightThemeColors.badgeBackground,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Text(
+                      model.label.toUpperCase(),
+                      style:
+                          LightThemeFonts.second14.copyWith(color: Colors.white),
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          SizedBoxes.h10,
-          Text(
-            model.title,
-            style: LightThemeFonts.h3,
-          ),
-          SizedBoxes.h10,
-          Text(
-            model.teacher,
-            style: LightThemeFonts.second12d,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                model.rating.toString(),
-                style: LightThemeFonts.second11l,
-              ),
-              SizedBoxes.w10,
-              _rating(rating: model.rating),
-              Expanded(
-                child: Text(
-                  "(${model.voters})",
-                  style: LightThemeFonts.second12d,
-                  textAlign: TextAlign.right,
+            SizedBoxes.h10,
+            Text(
+              model.title,
+              style: LightThemeFonts.h3,
+            ),
+            SizedBoxes.h10,
+            Text(
+              model.teacher,
+              style: LightThemeFonts.second12d,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  model.rating.toString(),
+                  style: LightThemeFonts.second11l,
                 ),
-              ),
-            ],
-          )
-        ],
+                SizedBoxes.w10,
+                _rating(rating: model.rating),
+                Expanded(
+                  child: Text(
+                    "(${model.voters})",
+                    style: LightThemeFonts.second12d,
+                    textAlign: TextAlign.right,
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

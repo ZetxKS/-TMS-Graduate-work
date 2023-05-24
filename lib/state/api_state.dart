@@ -4,7 +4,7 @@ abstract class ApiState {}
 
 class ApiLoadingState extends ApiState {}
 class ApiLoadedState extends ApiState {
-  final List<Model> list;
+  final List<dynamic> list;
   ApiLoadedState({required this.list});
 }
 class ApiEmptySate extends ApiState {}

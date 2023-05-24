@@ -16,9 +16,6 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (context.watch<AppBarCubit>().state != "Search") {
-      context.watch<AppBarCubit>().setTitle('Search');
-    }
     if (context.watch<CategoryCubit>().state is! ApiLoadedState) {
       context.watch<CategoryCubit>().load();
     }

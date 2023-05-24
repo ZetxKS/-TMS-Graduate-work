@@ -15,6 +15,7 @@ class AppScreen extends StatelessWidget {
         IndexRoute(),
         SearchRoute(),
         BookmakrRoute(),
+        ProfileRoute(),
       ],
       transitionBuilder: (context, child, animation) => FadeTransition(
         opacity: animation,
