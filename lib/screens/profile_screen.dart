@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:tmsgraduatework/app_router.dart';
 import 'package:tmsgraduatework/themes/light.dart';
 
 @RoutePage()
@@ -8,42 +9,95 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      //crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Expanded(
-          child: Container(
-            color: LightThemeColors.profileAppBarBackground,
-            padding: EdgeInsets.all(10),
-            child: PreferredSize(
-              preferredSize: Size.fromWidth(120),
-              child: Image.asset('assets/images/avatar.jpg'),
-            ),
+    return Padding(
+      padding: EdgeInsets.only(top: 70, right: 20, left: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            "@isayef",
+            style: LightThemeFonts.h1,
           ),
-        ),
-        Row(
-          children: [
-            Expanded(
-              child: ElevatedButton(
-                onPressed: () {},
-                child: Text('asd'),
-              ),
-            ),
-            Expanded(
-              child: ElevatedButton(
-                onPressed: () {},
-                child: Text('asd1'),
-              ),
-            ),
-            Expanded(
-              child: ElevatedButton(
-                onPressed: () {},
-                child: Text('asd2'),
-              ),
-            ),
-          ],
-        )
-      ],
+          SizedBoxes.h20,
+          Text(
+            "Just a simple guy who loves do something new and fun! 😜",
+            style: LightThemeFonts.second14,
+          ),
+          SizedBoxes.h20,
+          AutoTabsRouter.tabBar(
+            routes: [
+              ProjectTabRoute(),
+              CourseTabRoute(),
+              FollowingTabRoute(),
+            ],
+            homeIndex: 0,
+            builder: (context, child, controller) {
+              return Column(
+                children: [
+                  TabBar(
+                    tabs: [
+                      Tab(
+                        child: TabButton(
+                          count: 11,
+                          name: "Projects",
+                        ),
+                      ),
+                      Tab(
+                        child: TabButton(
+                          count: 21,
+                          name: "Courses",
+                        ),
+                      ),
+                      Tab(
+                        child: TabButton(
+                          count: 33,
+                          name: "Followers",
+                        ),
+                      ),
+                    ],
+                    controller: controller,
+                  )
+                ],
+              );
+            },
+          ),
+          SizedBoxes.h20,
+          /* TabBar(
+            controller: ,
+            tabs: [
+              
+            ],
+          ) */
+        ],
+      ),
+    );
+  }
+}
+
+class TabButton extends StatelessWidget {
+  final int count;
+  final String name;
+  const TabButton({
+    super.key,
+    required this.count,
+    required this.name,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          Text(
+            count.toString(),
+            style: LightThemeFonts.second16,
+          ),
+          Text(
+            name,
+            style: LightThemeFonts.normal.copyWith(fontSize: 18),
+          ),
+        ],
+      ),
     );
   }
 }

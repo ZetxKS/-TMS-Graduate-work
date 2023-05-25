@@ -11,13 +11,13 @@ class BottomNavButton extends StatelessWidget {
   final String svg;
   final String name;
   final int toIndex;
-  const BottomNavButton(
-      {Key? key,
-      required this.svg,
-      required this.name,
-      required this.toIndex,})
-      : super(key: key);
-    
+  const BottomNavButton({
+    Key? key,
+    required this.svg,
+    required this.name,
+    required this.toIndex,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     BottomNavCubit bottomNavCubit = context.watch<BottomNavCubit>();
@@ -29,7 +29,10 @@ class BottomNavButton extends StatelessWidget {
           "My saved List",
           "Profile",
         ];
-        BlocProvider.of<AppBarCubit>(context, listen: false).setTitle(appbartitles[toIndex]);
+
+        BlocProvider.of<AppBarCubit>(context, listen: false)
+            .setTitle(appbartitles[toIndex]);
+        BlocProvider.of<AppBarCubit>(context, listen: false).setPage(toIndex);
         bottomNavCubit.navigate(context, toIndex);
       },
       child: Padding(
