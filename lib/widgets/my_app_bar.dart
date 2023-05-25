@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:tmsgraduatework/models/user_model.dart';
 import 'package:tmsgraduatework/state/app_bar_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tmsgraduatework/state/bottom_nav_cubit.dart';
+import 'package:tmsgraduatework/state/user_cubit.dart';
 
 import '../themes/light.dart';
 
@@ -68,8 +70,18 @@ class _MyAppBarState extends State<MyAppBar> {
         if (widget.isIndex)
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: CircleAvatar(
-              backgroundImage: AssetImage('assets/images/avatar.jpg'),
+            child: BlocBuilder<UserCubit, UserModel?>(
+              builder: (context, state) {
+                Image? image = null;
+                if (state == null) {
+                  image = Image.asset('assets/images/avatar.jpg');
+                } else {
+                  image = Image.network(state.avatar);
+                }
+                return Container(
+                  child: CircleAvatar(backgroundImage: image.image),
+                );
+              },
             ),
           ),
         if (widget.isProfile)

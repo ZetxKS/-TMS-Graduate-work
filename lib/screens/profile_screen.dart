@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tmsgraduatework/app_router.dart';
+import 'package:tmsgraduatework/models/teacher_model.dart';
+import 'package:tmsgraduatework/models/user_model.dart';
+import 'package:tmsgraduatework/state/api_state.dart';
+import 'package:tmsgraduatework/state/course/course_cubit.dart';
+import 'package:tmsgraduatework/state/teachers_cubit.dart';
+import 'package:tmsgraduatework/state/user_cubit.dart';
 import 'package:tmsgraduatework/themes/light.dart';
 
 @RoutePage()
@@ -9,68 +16,97 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: 70, right: 20, left: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            "@isayef",
-            style: LightThemeFonts.h1,
-          ),
-          SizedBoxes.h20,
-          Text(
-            "Just a simple guy who loves do something new and fun! 😜",
-            style: LightThemeFonts.second14,
-          ),
-          SizedBoxes.h20,
-          AutoTabsRouter.tabBar(
-            routes: [
-              ProjectTabRoute(),
-              CourseTabRoute(),
-              FollowingTabRoute(),
-            ],
-            homeIndex: 0,
-            builder: (context, child, controller) {
-              return Column(
-                children: [
-                  TabBar(
-                    tabs: [
-                      Tab(
-                        child: TabButton(
-                          count: 11,
-                          name: "Projects",
-                        ),
+    return BlocBuilder<UserCubit, UserModel?>(builder: (context, state) {
+      if (state == null) {
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      }
+      return Padding(
+        padding: EdgeInsets.only(top: 70, right: 20, left: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              state.nickname,
+              style: LightThemeFonts.h1,
+            ),
+            SizedBoxes.h20,
+            Text(
+              "Just a simple guy who loves do something new and fun! 😜",
+              style: LightThemeFonts.second14,
+            ),
+            SizedBoxes.h20,
+            AutoTabsRouter.tabBar(
+              routes: [
+                ProjectTabRoute(),
+                CourseTabRoute(),
+                FollowingTabRoute(),
+              ],
+              homeIndex: 0,
+              builder: (context, child, controller) {
+                return Expanded(
+                  child: Column(
+                    // fit: StackFit.passthrough,
+                    children: [
+                      Stack(
+                        fit: StackFit.passthrough,
+                        alignment: Alignment.bottomCenter,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
+                                  color: Color(0xFFE9EFFD),
+                                  width: 2,
+                                ),
+                              ),
+                            ),
+                          ),
+                          TabBar(
+                            tabs: [
+                              Tab(
+                                child: TabButton(
+                                  count: state.projects.length,
+                                  name: "Projects",
+                                ),
+                              ),
+                              Tab(
+                                child: TabButton(
+                                  count: ((BlocProvider.of<CourseCubit>(context)
+                                              .state as ApiLoadedState)
+                                          .list[1] as List)
+                                      .length,
+                                  name: "Courses",
+                                ),
+                              ),
+                              Tab(
+                                child: TabButton(
+                                  count: BlocProvider.of<TeachersCubit>(context)
+                                      .getFollowed()
+                                      .length,
+                                  name: "Followers",
+                                ),
+                              ),
+                            ],
+                            controller: controller,
+                          ),
+                        ],
                       ),
-                      Tab(
-                        child: TabButton(
-                          count: 21,
-                          name: "Courses",
-                        ),
-                      ),
-                      Tab(
-                        child: TabButton(
-                          count: 33,
-                          name: "Followers",
+                      Expanded(
+                        child: SizedBox(
+                          child: child,
                         ),
                       ),
                     ],
-                    controller: controller,
-                  )
-                ],
-              );
-            },
-          ),
-          SizedBoxes.h20,
-          /* TabBar(
-            controller: ,
-            tabs: [
-              
-            ],
-          ) */
-        ],
-      ),
-    );
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+      );
+    });
   }
 }
 

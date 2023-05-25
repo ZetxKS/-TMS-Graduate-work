@@ -6,7 +6,9 @@ import 'package:tmsgraduatework/state/api_state.dart';
 class CourseCubit extends Cubit<ApiState> {
   final _courseProvider = CourseProvider();
 
-  CourseCubit() : super(ApiEmptySate());
+  CourseCubit() : super(ApiEmptySate()) {
+    load();
+  }
 
   Future<void> save(CourseModel model) async {
     await _courseProvider.saveCourse(model);
@@ -19,11 +21,10 @@ class CourseCubit extends Cubit<ApiState> {
   }
 
   void load() async {
-
     try {
       final List<dynamic> result = [];
       result.add(await _courseProvider.getCourses());
-      result.add(await _courseProvider.getLocalCourses());
+      result.add(await _courseProvider.getLocalCourses() ?? []);
       if (result[0].isNotEmpty) {
         emit(ApiLoadedState(list: result));
       } else {

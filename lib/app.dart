@@ -6,6 +6,8 @@ import 'package:tmsgraduatework/state/bottom_nav_cubit.dart';
 import 'package:tmsgraduatework/state/category/category_cubit.dart';
 import 'package:tmsgraduatework/state/app_bar_cubit.dart';
 import 'package:tmsgraduatework/state/course/course_cubit.dart';
+import 'package:tmsgraduatework/state/teachers_cubit.dart';
+import 'package:tmsgraduatework/state/user_cubit.dart';
 
 class App extends StatelessWidget {
   final _appRouter = AppRouter();
@@ -19,7 +21,9 @@ class App extends StatelessWidget {
         BlocProvider(create: (_) => AppBarCubit()),
         BlocProvider(create: (_) => BottomNavCubit()),
         BlocProvider(create: (_) => CategoryCubit()),
-        BlocProvider(create: (_) => CourseCubit(),),
+        BlocProvider(create: (_) => CourseCubit()),
+        BlocProvider(create: (_) => UserCubit()),
+        BlocProvider(create: (_) => TeachersCubit()),
       ],
       child: MaterialApp.router(
         routerConfig: _appRouter.config(),

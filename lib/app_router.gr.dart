@@ -39,18 +39,6 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const ProfileScreen(),
       );
     },
-    ProjectTabRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const ProjectTabScreen(),
-      );
-    },
-    SearchRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const SearchScreen(),
-      );
-    },
     CourseTabRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -61,6 +49,18 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const FollowingTabScreen(),
+      );
+    },
+    ProjectTabRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ProjectTabScreen(),
+      );
+    },
+    SearchRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SearchScreen(),
       );
     },
   };
@@ -123,34 +123,6 @@ class ProfileRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [ProjectTabScreen]
-class ProjectTabRoute extends PageRouteInfo<void> {
-  const ProjectTabRoute({List<PageRouteInfo>? children})
-      : super(
-          ProjectTabRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'ProjectTabRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [SearchScreen]
-class SearchRoute extends PageRouteInfo<void> {
-  const SearchRoute({List<PageRouteInfo>? children})
-      : super(
-          SearchRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'SearchRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
 /// [CourseTabScreen]
 class CourseTabRoute extends PageRouteInfo<void> {
   const CourseTabRoute({List<PageRouteInfo>? children})
@@ -174,6 +146,34 @@ class FollowingTabRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'FollowingTabRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ProjectTabScreen]
+class ProjectTabRoute extends PageRouteInfo<void> {
+  const ProjectTabRoute({List<PageRouteInfo>? children})
+      : super(
+          ProjectTabRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ProjectTabRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [SearchScreen]
+class SearchRoute extends PageRouteInfo<void> {
+  const SearchRoute({List<PageRouteInfo>? children})
+      : super(
+          SearchRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SearchRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
