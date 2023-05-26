@@ -13,6 +13,11 @@ class LightThemeColors {
   static const starColor = Color(0xFFFFA927);
   static const trialBackground = Color(0xFFFFF1F3);
   static const profileAppBarBackground = Color(0xFFB32318);
+  static const profileTabsBorderSide = Color(0xFFE9EFFD);
+  static const teacherCardButtonColorActive = Color(0xFFEDEEF0);
+  static const teacherCardButtonColorUnactive = Color(0xFF265AE8);
+  static const searchInputBorder = Color(0xFFFFF1F3);
+  static const searchInputFill = Color(0xFFFFF1F3);
 }
 
 class LightThemeFonts {

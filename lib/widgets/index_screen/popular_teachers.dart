@@ -10,12 +10,24 @@ class PopularTeachers extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Column(
       children: [
-        BlockHeader(title: "Our top popular teacher this month"),
+        BlockHeader(title: "Our top popular teacher this month", navTo: 4),
         SizedBoxes.h30,
         Row(
-          children: [PopularTeacherCard(id: 1, name: "Sayef Mahmud", profession: "Programmer",), SizedBox(
-            width: 10,
-          ), PopularTeacherCard(id: 2, name: "Sarrah Mory", profession: "Creative artist",)],
+          children: [
+            PopularTeacherCard(
+              id: 1,
+              name: "Sayef Mahmud",
+              profession: "Programmer",
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            PopularTeacherCard(
+              id: 2,
+              name: "Sarrah Mory",
+              profession: "Creative artist",
+            )
+          ],
         )
       ],
     );

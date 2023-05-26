@@ -11,6 +11,8 @@ class ProjectTabScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.count(
       crossAxisCount: 2,
+      mainAxisSpacing: 20,
+      crossAxisSpacing: 20,
       children: BlocProvider.of<UserCubit>(context)
           .state!
           .projects
@@ -28,7 +30,10 @@ class _projectCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
-      child: Image.network(url),
+      child: Image.network(
+        url,
+        fit: BoxFit.cover,
+      ),
     );
   }
 }

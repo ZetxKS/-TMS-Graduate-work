@@ -27,14 +27,31 @@ class ProfileScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              state.nickname,
-              style: LightThemeFonts.h1,
-            ),
-            SizedBoxes.h20,
-            Text(
-              "Just a simple guy who loves do something new and fun! 😜",
-              style: LightThemeFonts.second14,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 50),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      state.nickname,
+                      style: LightThemeFonts.h1,
+                    ),
+                    SizedBoxes.h20,
+                    Text(
+                      "Just a simple guy who loves do something new and fun! 😜",
+                      style: LightThemeFonts.second14,
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBoxes.h20,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Image.asset('assets/icons/05.instagram.png'),
+                        Image.asset('assets/icons/01.facebook.png'),
+                        Image.asset('assets/icons/02.twitter.png'),
+                      ],
+                    ),
+                  ]),
             ),
             SizedBoxes.h20,
             AutoTabsRouter.tabBar(
@@ -57,7 +74,7 @@ class ProfileScreen extends StatelessWidget {
                             decoration: BoxDecoration(
                               border: Border(
                                 bottom: BorderSide(
-                                  color: Color(0xFFE9EFFD),
+                                  color: LightThemeColors.profileTabsBorderSide,
                                   width: 2,
                                 ),
                               ),
@@ -93,6 +110,7 @@ class ProfileScreen extends StatelessWidget {
                           ),
                         ],
                       ),
+                      SizedBoxes.h20,
                       Expanded(
                         child: SizedBox(
                           child: child,

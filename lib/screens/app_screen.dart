@@ -22,6 +22,7 @@ class AppScreen extends StatelessWidget {
             SearchRoute(),
             BookmakrRoute(),
             ProfileRoute(),
+            TeachersRoute()
           ],
           transitionBuilder: (context, child, animation) => FadeTransition(
             opacity: animation,
@@ -40,7 +41,13 @@ class AppScreen extends StatelessWidget {
               size: (state?['page'] == 3 ? const Size.fromHeight(120) : null),
             );
           },
-          bottomNavigationBuilder: (context, tabsRouter) => const BottomNav(),
+          bottomNavigationBuilder: (context, tabsRouter) {
+            if (state!['page'] != 4) {
+              return const BottomNav();
+            } else {
+              return SizedBox();
+            }
+          },
           floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,
           floatingActionButtonBuilder: ((context, tabsRouter) {
             if (state!['page'] == 3) {
